@@ -1,5 +1,5 @@
-resource "kubernetes_namespace" "n" {
+resource "kubernetes_namespace" "capstone-namespace" {
   metadata {
-    name = "space-invaders"
+    name = "capstone-app"
   }
 }

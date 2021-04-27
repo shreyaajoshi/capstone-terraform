@@ -1,33 +1,33 @@
-resource "kubernetes_deployment" "si-deployment" {
+resource "kubernetes_deployment" "backend-deployment" {
   metadata {
-    name = "space-invaders-deployment"
+    name = "backend-deployment"
     labels = {
-      App = "space-invaders"
+      App = "capstone-app"
     }
-    namespace = kubernetes_namespace.n.metadata[0].name
+    namespace = kubernetes_namespace.capstone-namespace.metadata[0].name
   }
 
   spec {
-    replicas                  = 4
+    replicas                  = 1
     progress_deadline_seconds = 60
     selector {
       match_labels = {
-        App = "space-invaders"
+        App = "capstone-app"
       }
     }
     template {
       metadata {
         labels = {
-          App = "space-invaders"
+          App = "capstone-app"
         }
       }
       spec {
         container {
-          image = "drehnstrom/space-invaders:latest"
-          name  = "space-invaders"
+          image = "drehnstrom/events-internal-deloitte:v1.0"
+          name  = "capstone-backend"
 
           port {
-            container_port = 80
+            container_port = 8082
           }
 
           resources {
